@@ -1,0 +1,23 @@
+{
+  "name": "discord-realtime-profile-card",
+  "version": "0.1.0",
+  "author": "Cyclone Addons",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CycloneAddons/Discord-Realtime-Profile-Card"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run install-backend && npm run install-frontend && concurrently \"npm run start-backend-terminal\" \"npm run start-frontend-terminal\"",
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "start-backend": "node backend/index.js",
+    "start-frontend": "cd frontend && npm start",
+    "start-backend-terminal": "start cmd /k \"npm run start-backend\"",
+    "start-frontend-terminal": "start cmd /k \"npm run start-frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "wait-on": "^5.3.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "discord-data-ws",
+  "version": "0.1.0",
+  "author": "Cyclone Addons",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "events": "^3.3.0",
+    "ws": "^8.18.0"
+  }
+}
