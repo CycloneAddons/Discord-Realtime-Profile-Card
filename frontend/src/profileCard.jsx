@@ -1,13 +1,12 @@
 import Atropos from 'atropos/react';
 import React, { useState, useEffect } from 'react';
-import './profileCard.css'; 
+import './profileCard.css';
 import 'atropos/css';
 import { Desktop, Web, Mobile } from './platformSvg';
-import EffectRenderer from './profileEffects'; 
-
+import EffectRenderer from './profileEffects';
+import { toHTML } from 'discord-markdown';
 const CardProfile = ({
   themesColor,
-  apiUrl,
   ProfileId,
   userData,
 }) => {
@@ -19,45 +18,14 @@ const CardProfile = ({
     online: "#23a55a",
     offline: "#80848e"
   };
-  
-  const statusColor = statusColors[userData.status] || "#593695"; 
+
+  const statusColor = statusColors[userData.status] || "#593695";
 
   useEffect(() => {
     if (userData?.user_profile?.bio) {
-      let rawBio = userData.user_profile.bio;
-      const urlRegex = /(https?:\/\/[^\s<]+)/g;
-      const emojiRegex = /<a?:(\w+):(\d+)>/g;
-      const boldItalicRegex = /\*\*\*(.*?)\*\*\*/g;
-      const boldRegex = /\*\*(.*?)\*\*/g;
-      const italicRegex = /\*(.*?)\*/g;
-      const inlineCodeRegex = /`(.*?)`/g;
-      const codeBlockRegex = /```(.*?)```/g;
-      const blockQuoteRegex = />(.*)/g;
-console.log(rawBio);
-       
-let formattedBio = rawBio.replace(italicRegex, '<em>$1</em>');
-formattedBio = formattedBio.replace(boldItalicRegex, '<strong><em>$1</em></strong>');
-formattedBio = formattedBio.replace(boldRegex, '<strong>$1</strong>');
-formattedBio = formattedBio.replace(inlineCodeRegex, (match, content) => {
-  return `<code style="width: auto; height: auto; background: #0000002e; padding: 0 .2em; margin: -.2em 0; border-radius: 4px; text-indent: 0; white-space: pre-wrap; border: 1px solid rgba(0, 0, 0, 0);">${content}</code>`;
-});
-formattedBio = formattedBio.replace(blockQuoteRegex, '<blockquote class="discord-quote" >$1</blockquote>');
-formattedBio = formattedBio.replace(codeBlockRegex, '<code>$1</code>');
-console.log(formattedBio);  
+      console.log(userData.user);
 
-      rawBio = formattedBio.replace(urlRegex, (url) => {
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #42adf5; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${url}</a>`;
-      });
-
-      console.log(rawBio);
-       formattedBio = rawBio.replace(emojiRegex, (match, name, id) => {
-        const isAnimated = match.startsWith('<a:');
-        const emojiUrl = `https://cdn.discordapp.com/emojis/${id}.webp?size=56&animated=${isAnimated}`;
-        return `<img src="${emojiUrl}" alt=":${name}:" title=":${name}:" class="discord-emoji" />`;
-      });
-
-    
-      setUserBioFormatted(formattedBio);
+      setUserBioFormatted(toHTML(userData.user_profile.bio));
     }
   }, [userData]);
 
@@ -94,7 +62,7 @@ console.log(formattedBio);
                 <div
                   className="card nitro-card"
                   style={{ '--color1': themesColor[0], '--color2': themesColor[1] }}
-                >
+                 >
                   <EffectRenderer selectedId={userData?.user_profile?.profile_effect?.id} atroposO="1.5" />
 
                   <div className="card-header">
@@ -110,7 +78,10 @@ console.log(formattedBio);
 
                           className="banner-img"
                           style={{
-                            backgroundImage: `url(https://cdn.discordapp.com/banners/${ProfileId}/${userData.user.banner}.webp?animated=true&size=2048)`,
+                            backgroundImage: `url(${userData.user.banner
+                                ? `https://cdn.discordapp.com/banners/${ProfileId}/${userData.user.banner}.webp?animated=true&size=2048`
+                                : `https://singlecolorimage.com/get/${userData.user.banner_color.replace('#', "")}/400x150`
+                              })`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover"
                           }}
@@ -191,37 +162,37 @@ console.log(formattedBio);
 
 
                       <div className="badges-container">
-                      {userData?.badges?.map((badge, index) => (
-  <div className="badge-item" key={index}>
-    <a
-      href={badge.link || '#'}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="badge-link"
-    >
-      {badge.id === 'desktop' ? (
-        <Desktop fill={badge.color} />
-      ) : badge.id === 'mobile' ? (
-        <Mobile fill={badge.color} />
-      ) : badge.id === 'web' ? (
-        <Web fill={badge.color} />
-      ) : (
-        <img
-          src={`${apiUrl}badge/${badge.icon}.png`}
-          alt={badge.id}
-        />
-      )}
-      <div className="tooltip tooltip-up">
-        {badge.description}
-      </div>
-    </a>
-  </div>
-))}
+                        {userData?.badges?.map((badge, index) => (
+                          <div className="badge-item" key={index}>
+                            <a
+                              href={badge.link || '#'}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="badge-link"
+                            >
+                              {badge.id === 'desktop' ? (
+                                <Desktop fill={badge.color} />
+                              ) : badge.id === 'mobile' ? (
+                                <Mobile fill={badge.color} />
+                              ) : badge.id === 'web' ? (
+                                <Web fill={badge.color} />
+                              ) : (
+                                <img
+                                  src={`https://cdn.discordapp.com/badge-icons/${badge.icon}.png`}
+                                  alt={badge.id}
+                                />
+                              )}
+                              <div className="tooltip tooltip-up">
+                                {badge.description}
+                              </div>
+                            </a>
+                          </div>
+                        ))}
 
                       </div>
                     </div>
 
-                    
+
                     <div className="profile-body" data-atropos-offset="2.5">
                       <div className="global-name flex justify-between items-center">
                         <p>
@@ -229,10 +200,23 @@ console.log(formattedBio);
                         </p>
                       </div>
                       <div className="username">
-                        <p>
-                          {userData?.user?.username}
-                          {userData?.user_profile?.pronouns ? ` • ${userData.user_profile.pronouns}` : ''}
-                        </p>
+                        <div className="pro-guild">
+                          <p>
+                            {userData?.user?.username}
+                            {userData?.user_profile?.pronouns ? ` • ${userData.user_profile.pronouns}` : ''}
+                            {userData.user.clan && (
+                              <span className="guild-info">
+                                <img
+                                  src={`https://cdn.discordapp.com/clan-badges/${userData.user.clan.identity_guild_id}/${userData.user.clan.badge}.png?size=16`}
+                                  alt="Guild Icon"
+                                  className="guild-icon"
+                                />
+                                <span>{userData.user.clan.tag}</span>
+                              </span>
+                            )}
+                          </p>
+                        </div>
+
                       </div>
                       <hr />
                       {userData?.user_profile?.bio && (

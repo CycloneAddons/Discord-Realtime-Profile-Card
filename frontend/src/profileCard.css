@@ -60,10 +60,26 @@ a {
 .atropos-card {
   display: block;
   margin: 60px auto;
-  width: 358px;
+  width: 450px;
 }
 
-.discord-quote {
+.atropos-shadow {
+  left: 60px !important;
+  width: 70% !important;
+}
+
+
+.markdown {
+  color: #dddddd;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.markdown code {
+  width: auto; height: auto; background: #48484869; padding: 0 .2em; margin: -.2em 0; border-radius: 4px; text-indent: 0; white-space: pre-wrap; border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.markdown blockquote {
   border-left: 4px solid #3c3c3c;
     padding-left: 12px;
     margin: 0;
@@ -72,14 +88,32 @@ a {
     white-space: pre-wrap;
 }
 
-.discord-quote + .discord-quote {
+.markdown blockquote + .markdown blockquote {
   margin-top: 0; /* Remove margin between consecutive blockquotes */
 }
 
-.discord-quote:first-of-type {
+.markdown blockquote:first-of-type {
   margin-top: 3px; /* Remove top margin for the first blockquote */
 }
 
+
+.markdown a {
+  color: #42adf5;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease-in-out;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+
+
+.markdown .d-emoji {
+  width: 22px; /* Adjust size as needed */
+  height: 22px;
+  vertical-align: middle; /* Align with text */
+}
+ 
 
 
 .card {
@@ -146,6 +180,7 @@ a {
       .profile-logo {
         top: -50px;
         position: relative;
+        border-radius: 50%;
         /* border: 6px solid #292b2f00;
         border-radius: 50%;
         border-color: transparent; */
@@ -154,7 +189,6 @@ a {
           display: block;
           width: 85px;
           height: 85px;
-          border-radius: 50%;
         }
 
         &::before {
@@ -443,17 +477,6 @@ a {
   }
 }
 
-.markdown {
-  color: #dddddd;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-.discord-emoji {
-  width: 22px; /* Adjust size as needed */
-  height: 22px;
-  vertical-align: middle; /* Align with text */
-}
- 
 
 .badges-connected-accounts {
   display: flex;
@@ -532,8 +555,13 @@ a {
   background-image: linear-gradient(0, var(--color2), var(--color1));
   background-blend-mode: multiply;
   background-color: #0000006c;
+
 }
 
+
+.atropos-highlight {
+display: none !important;
+}
 
 .nitro-card:before {
   content: "";
@@ -553,6 +581,35 @@ a {
 .nitro-card .card-body .profile-body {
   background: #18191c91;
 }
+.pro-guild {
+  display: flex;
+  align-items: center;
+}
+
+.pro-guild p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+.guild-info {
+  background: #5a5c6477;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: 500;
+  padding: 0 3px; /* Add horizontal padding for spacing */
+  width: auto; /* Automatically adjust width based on content */
+  max-width: 100%; /* Optional: Prevent it from overflowing */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.guild-icon {
+  width: 14px;
+  margin-right: 4px; /* Adjust spacing between icon and text */
+}
+
+
 
 .nitro-card .card-body .profile-header .badges-container {
   background: #18191c77;

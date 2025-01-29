@@ -50,6 +50,7 @@ const EffectRenderer = ({ selectedId, atroposO }) => {
               width: "100%",
               objectFit: "cover",
               zIndex: effect.zIndex,
+              pointerEvents: 'none',
             }}
             alt="Effect"
             data-atropos-offset={atropos}

@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "author": "Cyclone Addons",
   "dependencies": {
+    "discord-markdown": "^2.5.1",
     "dotenv": "^16.4.7",
     "events": "^3.3.0",
+    "express": "^4.21.2",
     "ws": "^8.18.0"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
