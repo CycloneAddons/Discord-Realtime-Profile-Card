@@ -9,6 +9,10 @@ Discord-React-Profile is a React project by Cyclone Addons that displays a custo
 - Customizable card design with easy styling.
 - Responsive layout for different screen sizes.
 
+## Help
+* GPT is Used in CSS to Make the Site Responsive in CSS
+
+
 ## How to Use
 
 1. **Installation**:
@@ -46,6 +50,8 @@ Discord-React-Profile is a React project by Cyclone Addons that displays a custo
 4. **Customization**:
    - Open the `src` folder and edit the components to customize the profile card design and features.
    - Modify the `styles.css` file to change the styling.
+
+
 
 ## Contributions and Support
 
