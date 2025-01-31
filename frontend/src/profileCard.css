@@ -89,11 +89,11 @@ a {
 }
 
 .markdown blockquote + .markdown blockquote {
-  margin-top: 0; /* Remove margin between consecutive blockquotes */
+  margin-top: 0;
 }
 
 .markdown blockquote:first-of-type {
-  margin-top: 3px; /* Remove top margin for the first blockquote */
+  margin-top: 3px;
 }
 
 
@@ -109,9 +109,9 @@ a {
 
 
 .markdown .d-emoji {
-  width: 22px; /* Adjust size as needed */
+  width: 22px; 
   height: 22px;
-  vertical-align: middle; /* Align with text */
+  vertical-align: middle; 
 }
  
 
@@ -399,13 +399,203 @@ a {
       border-top: 1.5px solid #9f9f9f54;
     }
 
+    .category-titles {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    
     .category-title {
       color: white;
       font-weight: 700;
       text-transform: uppercase;
       font-size: 0.8rem;
-      margin-bottom: 8px;
+      padding: 5px 10px;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
     }
+
+    .category-title.ct-info {
+      color: rgb(157, 157, 157);
+      font-weight: 500 !important;
+    }
+    
+
+    .category-title.active {
+      color: white !important;
+      font-weight: 700 !important;
+      border-bottom: 2px solid #ffffff;
+     
+    }
+    
+
+    .all-activities {
+      max-height: 250px;
+      overflow: auto;
+    }
+
+    .card__39ec2 {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+      overflow: visible;
+      position: relative;
+      border: none;
+      border-radius: 4px;
+    }
+    .platformIcon__39ec2 {
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      background-color: rgb(168, 168, 168);
+      width: 15px;
+      height: 15px;
+  }
+    .header__39ec2 {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+  }
+  .headerText__39ec2 {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    overflow: hidden;
+}
+.text-xs\/medium_cf4812 {
+  font-size: 12px;
+  line-height: 1.3333333333333333;
+  font-weight: 500;
+}
+.overflow__82b15 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+}
+
+.body__39ec2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.content__39ec2 {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.imagePosition_ef9ae7 {
+  position: relative;
+  overflow: visible;
+  display: flex;
+  height: -moz-max-content;
+  height: max-content;
+  align-items: center;
+}
+.imageContainer_ef9ae7 {
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+}
+.imageContainer_ef9ae7 .contentImage_ef9ae7 {
+  min-width: 60px;
+}
+.contentImage_ef9ae7 {
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.details__39ec2 {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.heading-sm\/semibold_cf4812 {
+  font-size: 14px;
+  line-height: 1.2857142857142858;
+  font-weight: 600;
+}
+.text-xs\/normal_cf4812 {
+  font-size: 12px;
+  line-height: 1.3333333333333333;
+  font-weight: 400;
+}
+.badges__39ec2 {
+  flex-wrap: wrap;
+  -moz-column-gap: 8px;
+  column-gap: 8px;
+  row-gap: 0;
+}
+.badgeContainer__635ed {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+.badgeContainer__635ed svg {
+  flex-shrink: 0;
+}
+.timestamp__230d2.bold__230d2 {
+  font-weight: 700;
+}
+.badgeContainer__635ed div {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.text-xs\/medium_cf4812 {
+  font-size: 12px;
+  line-height: 1.3333333333333333;
+  font-weight: 500;
+}
+.tabularNumbers__4bd52 {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.aspectRatio_ef9ae7 {
+  aspect-ratio: 1 / 1;
+}
+.smallImageContainer_ef9ae7 {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2147483647px;
+  flex-shrink: 0;
+}
+
+
+.container__8e51c {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar__8e51c {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #848080;
+}
+
+.progress__8e51c {
+  height: inherit;
+  border-radius: inherit;
+  min-width: 4px;
+  background-color: white;
+}
+
 
     .connected-accounts {
       margin-top: 12px;
@@ -558,6 +748,27 @@ a {
 
 }
 
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #c4bcbc;
+}
+
+*::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #f5f5f500;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+
 
 .atropos-highlight {
 display: none !important;
@@ -598,15 +809,15 @@ display: none !important;
   align-items: center;
   border-radius: 4px;
   font-weight: 500;
-  padding: 0 3px; /* Add horizontal padding for spacing */
-  width: auto; /* Automatically adjust width based on content */
-  max-width: 100%; /* Optional: Prevent it from overflowing */
-  white-space: nowrap; /* Prevent text wrapping */
+  padding: 0 3px;
+  width: auto;
+  max-width: 100%; 
+  white-space: nowrap;
 }
 
 .guild-icon {
   width: 14px;
-  margin-right: 4px; /* Adjust spacing between icon and text */
+  margin-right: 4px;
 }
 
 

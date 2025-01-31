@@ -5,6 +5,7 @@ import 'atropos/css';
 import { Desktop, Web, Mobile } from './platformSvg';
 import EffectRenderer from './profileEffects';
 import { toHTML } from 'discord-markdown';
+import { Playing, Listening, Watching } from './activities';
 const CardProfile = ({
   themesColor,
   ProfileId,
@@ -12,6 +13,10 @@ const CardProfile = ({
 }) => {
   const [message, setMessage] = useState('');
   const [userBioFormatted, setUserBioFormatted] = useState('');
+  const hasBio = userData?.user_profile?.bio;
+  const hasActivities = [{ hi: 'afsf' }];
+  const [selectedTab, setSelectedTab] = useState(hasBio ? "about" : hasActivities ? "activities" : null);
+  console.log(userData?.activities);
   const statusColors = {
     idle: "#f0b232",
     dnd: "#f23f43",
@@ -23,14 +28,11 @@ const CardProfile = ({
 
   useEffect(() => {
     if (userData?.user_profile?.bio) {
-      console.log(userData.user);
-
       setUserBioFormatted(toHTML(userData.user_profile.bio));
     }
   }, [userData]);
 
 
-  //Body margin controler according to badges  
   useEffect(() => {
     const profileHeader = document.querySelector('.profile-header');
     const profileBody = document.querySelector('.profile-body');
@@ -45,12 +47,19 @@ const CardProfile = ({
     }
   }, [userData]);
 
+  //Activity type check krne ke liye
+  const Components = {
+    0: (activity) => <Playing activity={activity} />,
+    2: (activity) => <Listening activity={activity} />,
+    3: (activity) => <Watching activity={activity} />
+  };
 
-  //Currently The Most Use less thing
+  //Currently The Most Useless thing
   const handleSendMessage = () => {
     console.log(`Message sent: ${message}`);
     setMessage('');
   };
+
 
   return (
     <Atropos className="atropos atropos-card">
@@ -62,7 +71,7 @@ const CardProfile = ({
                 <div
                   className="card nitro-card"
                   style={{ '--color1': themesColor[0], '--color2': themesColor[1] }}
-                 >
+                >
                   <EffectRenderer selectedId={userData?.user_profile?.profile_effect?.id} atroposO="1.5" />
 
                   <div className="card-header">
@@ -72,6 +81,10 @@ const CardProfile = ({
                           <rect fill="white" x="0" y="0" width="100%" height="100%" />
                           <circle fill="black" cx="57.5" cy="125" r="50.3"></circle>
                         </mask>
+                        <mask id="svg-mask-content-image-60" maskContentUnits="objectBoundingBox" viewBox="0 0 1 1">
+                          <rect fill="white" x="0" y="0" width="100%" height="100%"></rect>
+                          <circle fill="black" cx="0.8666666666666667" cy="0.8666666666666667" r="0.23333333333333334"></circle>
+                        </mask>
                       </defs>
                       <foreignObject x="0" y="0" width="100%" height="100%" mask="url(#uid_124)" >
                         <div
@@ -79,8 +92,8 @@ const CardProfile = ({
                           className="banner-img"
                           style={{
                             backgroundImage: `url(${userData.user.banner
-                                ? `https://cdn.discordapp.com/banners/${ProfileId}/${userData.user.banner}.webp?animated=true&size=2048`
-                                : `https://singlecolorimage.com/get/${userData.user.banner_color.replace('#', "")}/400x150`
+                              ? `https://cdn.discordapp.com/banners/${ProfileId}/${userData.user.banner}.webp?animated=true&size=2048`
+                              : `https://singlecolorimage.com/get/${userData.user.banner_color.replace('#', "")}/400x150`
                               })`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover"
@@ -107,8 +120,8 @@ const CardProfile = ({
                               src={`https://cdn.discordapp.com/avatar-decoration-presets/${userData.user.avatar_decoration_data.asset}.png`}
                               alt="Avatar decoration"
                               style={{
-                                mask: 'url(#svg-mask-avatar-decoration-status-round-80)', // Apply the mask here
-                                WebkitMask: 'url(#svg-mask-avatar-decoration-status-round-80)', // For WebKit browsers
+                                mask: 'url(#svg-mask-avatar-decoration-status-round-80)',
+                                WebkitMask: 'url(#svg-mask-avatar-decoration-status-round-80)',
                               }}
                             />
                           )}
@@ -144,7 +157,7 @@ const CardProfile = ({
                               <polygon fill="black" points="0.35,0.25 0.78301275,0.5 0.35,0.75"></polygon>
                             </mask>
 
-                            {/* Status */}
+
                             <circle fill="black" r="20" cx="100" cy="100" style={{ opacity: .45 }}></circle>
                             <rect width="24" height="24" x="88" y="88" fill={statusColor} mask={`url(#svg-mask-status-${userData.status})`} className="pointerEvents_c51b4e"></rect>
                           </svg>
@@ -153,8 +166,8 @@ const CardProfile = ({
                             src={`https://cdn.discordapp.com/avatars/${ProfileId}/${userData.user.avatar}.webp?animated=${userData.user.avatar.startsWith('a_')}`}
                             alt="Avatar"
                             style={{
-                              mask: 'url(#svg-mask-avatar-status-round-32)', // Apply the mask here
-                              WebkitMask: 'url(#svg-mask-avatar-status-round-32)', // For WebKit browsers
+                              mask: 'url(#svg-mask-avatar-status-round-32)',
+                              WebkitMask: 'url(#svg-mask-avatar-status-round-32)',
                             }}
                           />
                         </div>
@@ -219,17 +232,49 @@ const CardProfile = ({
 
                       </div>
                       <hr />
-                      {userData?.user_profile?.bio && (
-                        <div className="basic-infos">
-                          <div className="category-title">About Me</div>
-                          <div
-                            className="markdown"
-                            dangerouslySetInnerHTML={{
-                              __html: userBioFormatted.replace(/\n/g, '<br>'),
-                            }}
-                          ></div>
+
+
+
+                      <div className="basic-infos">
+                        <div className="category-titles">
+                          {hasBio && (
+                            <div
+                              className={`category-title ct-info ${selectedTab === "about" ? "active" : ""}`}
+                              onClick={() => setSelectedTab("about")}
+                            >
+                              About Me
+                            </div>
+                          )}
+                          {hasActivities && (
+                            <div
+                              className={`category-title ct-info ${selectedTab === "activities" ? "active" : ""}`}
+                              onClick={() => setSelectedTab("activities")}
+                            >
+                              Activities
+                            </div>
+                          )}
                         </div>
-                      )}
+
+                        <div className="markdown">
+                          {selectedTab === "about" && hasBio && (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: userBioFormatted.replace(/\n/g, '<br>'),
+                              }}
+                            ></div>
+                          )}
+                          {selectedTab === "activities" && hasActivities && (
+
+                            <div className="all-activities">
+                              {userData?.activities.map((activity) => Components[activity.type]?.(activity))}
+                            </div>
+
+                          )}
+                        </div>
+                      </div>
+
+
+
                       {userData?.connected_accounts?.length > 0 && (
                         <div className="connected-accounts">
                           <div className="category-title">Connected accounts</div>

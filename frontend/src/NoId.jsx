@@ -12,7 +12,6 @@ const DiscordIdPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (discordId) {
-      // Redirect to the profile page with the provided ID
       navigate(`/${discordId}`);
     }
   };
@@ -26,7 +25,7 @@ const DiscordIdPage = () => {
     height: '100vh',
     flexDirection: 'column',
     textAlign: 'center',
-    backgroundColor: '#2f3136', // Optional background color
+    backgroundColor: '#2f3136',
   }}
 >
   <h1 style={{color: "white"}}>Enter Your Discord Profile ID</h1>

@@ -7,12 +7,10 @@ const app = express();
 const port = process.env.PORT || 10000;
 
 
-// Start the Express server
 const server = app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
 
-// Integrate WebSocket server with the Express server
 const wss = new WebSocket.Server({ server });
 const lastOnlineData = {};
 const userSubscriptions = {};
@@ -30,6 +28,7 @@ presence.on('update', async (data) => {
 presence.on('get', async ({ data, userId }) => {
     if (data) {
         sendPresenceData(await fullData(data));
+        console.log(data);
         lastOnlinePlatform(data);
     } else {
         sendPresenceData(await fullData(offline[userId] || { user: { id: userId }, status: 'offline', client_status: { desktop: 'offline' }, activities: [] }));

@@ -12,13 +12,12 @@ class BaseEffect {
       this.height = height;
       this.startTime = null;
       this.isVisible = false;
-      this.offsetTime = 10000; // Time period (10 seconds) for the offset
+      this.offsetTime = 10000;
 
     }
   
     update(now) {
       if (this.startTime === null) {
-        // Adjust `start` after 10 seconds
         if (10000 >= this.originalStart + this.offsetTime) {
           this.start = this.originalStart;
         }
@@ -41,7 +40,7 @@ class BaseEffect {
         const loopDuration = this.duration + this.loopDelay;
   
         if (elapsed >= loopDuration) {
-          this.startTime = now; // Reset for next loop
+          this.startTime = now; 
         }
   
         this.isVisible = elapsed <= this.duration;
