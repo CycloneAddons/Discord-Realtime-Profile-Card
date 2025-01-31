@@ -35,10 +35,6 @@ Discord-React-Profile is a React project by Cyclone Addons that displays a custo
      WEBHOOK= # Discord webhook 
      SUPPORTROLE= # Discord Supporter role for Error related messsage to them
      ```
-   - Create a `.env` file in the `frontend` folder and add the following:
-     ```env
-     REACT_APP_USERID= # Discord USERID
-     ```
 
 3. **Running the Project**:
    - Start the development server:
